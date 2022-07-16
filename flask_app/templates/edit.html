@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Recipes</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='new_tvshow.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Edit TV show!</h1>
+        <div class="flexbox">
+            <a href="/tvshows">TV shows</a>
+            <a href="/logout">Log out</a>
+        </div>
+    </header>
+
+    <div id="bigcolumn">
+
+        
+        <form class="flexbox" action="/tvshows/update/{{tvshow[0]['id']}}" method="post">
+            
+            <div id="register" class="halfcolumn">
+                <label for="title">Title:</label>
+                <input type="text" name="title" value="{{tvshow[0]['title']}}">
+
+                <label for="network">Network:</label>
+                <input type="text" name="network" value="{{tvshow[0]['network']}}">
+
+
+                <label for="description">Description:</label>
+                <textarea name="description" rows="5">{{tvshow[0]['description']}}</textarea>
+                
+                <label for="release_date">Release Date:</label>
+                <input type="date" name="release_date" value="{{tvshow[0]['release_date']}}">
+    
+    
+                <input type="submit" value="Add">
+            </div>
+
+            
+        </form>
+        
+        
+    </div>
+    {% with messages = get_flashed_messages()%}
+    {%if messages%}
+    {%for message in messages%}
+    <p>{{message}}</p>
+    {%endfor%}
+    {%endif%}
+    {%endwith%}
+</body>
+</html>

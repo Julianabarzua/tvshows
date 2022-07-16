@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tvshow</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='tvshows.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Welcome {{usuarioLogeado[0]['first_name']}}!</h1>
+        <div class="flexbox">
+            <a href="/tvshows">TV shows</a>
+            <a href="/logout">Log out</a>
+        </div>
+    </header>
+
+    <div id="bigcolumn">
+
+        <h2 class="titulo">{{tvshow[0]['title']}} - liked by: {{likes_count[0]['count']}}</h2>
+        <br><p style="font-weight:bold;">Network:</p>
+        <p>{{tvshow[0]['network']}}</p>
+        <br><p style="font-weight:bold;">Release Date:</p>
+        <p>{{tvshow[0]['release_date']}}</p>
+        <br><p style="font-weight:bold;">Description:</p>
+        <p>{{tvshow[0]['description']}}</p>
+        <br><p style="font-weight:bold;">Posted by:</p>
+        <p>{{tvshow[0]['owner_name']}}</p>
+
+        
+        
+    </div>
+</body>
+</html>

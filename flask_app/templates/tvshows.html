@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>tvshows</title>
+    <link rel= "stylesheet" type= "text/css" href= "{{ url_for('static',filename='tvshows.css') }}">
+
+</head>
+<body>
+    <header>
+        <h1>Welcome {{usuarioLogeado[0]['first_name']}}!</h1>
+        <div class="flexbox">
+            <a href="/tvshows/new">+ Create</a>
+            <a href="/logout">Log out</a>
+        </div>
+    </header>
+
+    <div id="bigcolumn">
+
+        <h2 class="titulo">All TV shows:</h2>
+        
+        <table id="customers">
+            <thead>
+                <tr>
+                    <th>Title</th>
+                    <th>Network</th>
+                    <th>Release Date</th>
+                    <th>Actions</th>
+                    <th>Like!</th>
+                </tr>
+            </thead>
+            
+            <tbody>
+            {% for tvshow in tvshows %}
+                <tr>
+                    <td>{{tvshow.title}}</td>
+                    <td>{{tvshow.network}}</td>
+
+                    <td>{{tvshow.release_date}}</td>
+                    <td>
+                        <a style="color:black" href="/tvshows/{{tvshow.id}}">Show</a>
+                        {%if tvshow.posted_by == session.user_id%}
+                        <a style="color:black" href="/tvshows/edit/{{tvshow.id}}">Edit</a>
+                        <a style="color:black" href="/delete_tvshow/{{tvshow.id}}">Delete</a>
+                        {%endif%}
+                    </td>
+                    <td>
+                        {%if tvshow.posted_by != session.user_id%}
+                            {%if tvshow.id in shows_liked%}
+                                <a style="color:black;" href="/delete_like/{{tvshow.id}}">Unlike</a>
+                            {%else%}
+                                <a style="color:black;" href="/add_like/{{tvshow.id}}">Like</a>
+                            {%endif%}
+                        {%endif%}
+                    </td>
+                </tr>
+            {% endfor %}
+                
+            </tbody>
+            
+            
+        </table>
+    </div>
+</body>
+</html>
